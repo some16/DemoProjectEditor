@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 Accept: "application/json"
             },
             body: JSON.stringify(data),
-            mode: "no-cors" // Set the request mode to 'no-cors'
+            // mode: "no-cors" // Set the request mode to 'no-cors'
         })
         .then(response => response.json())
         .then(data => {
