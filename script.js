@@ -19,13 +19,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Send a POST request to the GitHub OAuth access_token endpoint
         fetch(oauthUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-        },
-        body: JSON.stringify(data),
-        mode: "no-cors" // Set the request mode to 'no-cors'
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            body: JSON.stringify(data),
+            mode: "no-cors" // Set the request mode to 'no-cors'
         })
         .then(response => response.json())
         .then(data => {
