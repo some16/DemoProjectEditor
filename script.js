@@ -18,12 +18,12 @@ document.addEventListener("DOMContentLoaded", function() {
         token = undefined;
     });
 
-    if (token !== undefined) {
+    if (token == undefined) {
         console.log("Token is undefined, setting up github auth");
-        chooseRepo();
+        authSetup();
     } else {
         console.log("Token is valid, setting up editor");
-        authSetup();
+        chooseRepo();
     }
 });
 
@@ -32,6 +32,7 @@ function authSetup() {
 
     const urlParams = new URLSearchParams(window.location.search);
     const codeParam = urlParams.get("code");
+    
     if (codeParam) {
         console.log("codeParam exists!")
         document.getElementById("auth-with-github").innerHTML = "<p>Authenticating with Github</p>";
