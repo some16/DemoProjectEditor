@@ -1,5 +1,9 @@
 import { Octokit, App } from "https://esm.sh/octokit";
 
+// Access the "test" cookie to retrieve the GitHub token
+const cookieName = 'test'; // Change this to match your cookie name
+const token = getCookie(cookieName); // Implement a function to get the cookie value
+
 document.addEventListener("DOMContentLoaded", function() {
     // Get code from url
     const urlParams = new URLSearchParams(window.location.search);
@@ -78,10 +82,6 @@ function displayRepositories(repositories) {
 
     repoListElement.appendChild(ul);
 }
-
-// Access the "test" cookie to retrieve the GitHub token
-const cookieName = 'test'; // Change this to match your cookie name
-token = getCookie(cookieName); // Implement a function to get the cookie value
 
 if (!token) {
   console.error(`Cookie "${cookieName}" not found or token is empty.`);
