@@ -11,7 +11,7 @@ var octokit = new Octokit({ auth: `token ${token}` });
 
 octokit.request('GET /user')
 .catch(error => {
-    console.error('Token is invalid or another error occurred:', error.message)
+    console.log(`Token is invalid probably. Token: ${token}`)
     token = undefined;
 });
 
