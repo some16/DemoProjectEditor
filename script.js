@@ -16,15 +16,16 @@ document.addEventListener("DOMContentLoaded", function() {
     .catch(error => {
         console.log(`Token is invalid probably. Token: ${token}`)
         token = undefined;
+    })
+    .then(() => {
+        if (token == undefined) {
+            console.log("Token is undefined, setting up github auth");
+            authSetup();
+        } else {
+            console.log("Token is valid, setting up editor");
+            chooseRepo();
+        }
     });
-
-    if (token == undefined) {
-        console.log("Token is undefined, setting up github auth");
-        authSetup();
-    } else {
-        console.log("Token is valid, setting up editor");
-        chooseRepo();
-    }
 });
 
 function authSetup() {
@@ -32,7 +33,7 @@ function authSetup() {
 
     const urlParams = new URLSearchParams(window.location.search);
     const codeParam = urlParams.get("code");
-    
+
     if (codeParam) {
         console.log("codeParam exists!")
         document.getElementById("auth-with-github").innerHTML = "<p>Authenticating with Github</p>";
