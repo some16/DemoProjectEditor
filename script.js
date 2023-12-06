@@ -9,9 +9,12 @@ function getCookie(name) {
 const token = getCookie('test');
 
 if (token !== undefined) {
-    document.getElementById("auth-with-github").style.display = "block";
-} else {
     document.getElementById("choose-repo").style.display = "block";
+    console.log(`If. Token is ${token}`);
+} else {
+    document.getElementById("auth-with-github").style.display = "block";
+    console.log(`Else. Token is ${token}`);
+    
 }
 
 
