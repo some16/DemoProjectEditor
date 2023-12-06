@@ -76,3 +76,50 @@ function displayRepositories(repositories) {
 
     repoListElement.appendChild(ul);
 }
+
+
+const Octokit = require('@octokit/rest');
+
+// Access the "test" cookie to retrieve the GitHub token
+const cookieName = 'test'; // Change this to match your cookie name
+const token = getCookie(cookieName); // Implement a function to get the cookie value
+
+if (!token) {
+  console.error(`Cookie "${cookieName}" not found or token is empty.`);
+  process.exit(1);
+}
+
+// Initialize Octokit with the token
+const octokit = new Octokit({
+  auth: `token ${token}`,
+});
+
+// Fetch private repositories
+async function getPrivateRepositories() {
+  try {
+    const response = await octokit.repos.listForAuthenticatedUser({
+      visibility: 'private',
+    });
+
+    // Process the list of private repositories
+    const privateRepos = response.data;
+    console.log('Private Repositories:');
+    privateRepos.forEach((repo) => {
+      console.log(repo.full_name);
+    });
+  } catch (error) {
+    console.error('Error fetching private repositories:', error.message);
+  }
+}
+
+getPrivateRepositories();
+
+// Function to get the value of a cookie
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    return parts.pop().split(';').shift();
+  }
+  return null;
+}
