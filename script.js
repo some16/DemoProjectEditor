@@ -8,7 +8,7 @@ function getCookie(name) {
   
 const token = getCookie('test');
 
-if (cookieValue !== undefined && cookieValue !== 'undefined') {
+if (token !== undefined && token !== 'undefined') {
     const octokit = new Octokit({ auth: `token YOUR_GITHUB_TOKEN` });
 
     octokit.request('GET /user')
