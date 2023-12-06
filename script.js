@@ -85,7 +85,6 @@ function displayRepositories(repositories) {
 
 if (!token) {
   console.error(`Cookie "${cookieName}" not found or token is empty.`);
-  process.exit(1);
 }
 
 // Initialize Octokit with the token
@@ -96,7 +95,7 @@ const octokit = new Octokit({
 octokit.rest.repos.listForAuthenticatedUser({
   visibility: 'private',
 }).then(({ data }) => {
-  // handle the list of repositories
+  displayRepositories(data);
   console.log(data);
 }).catch((error) => {
   // handle any errors
