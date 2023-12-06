@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Display Code Parameter</title>
-    <script type="module">
-    import { Octokit, App } from "https://esm.sh/octokit";
-    </script>
 </head>
 <body>
-    <p><a href="https://github.com/apps/demoprojecteditor/installations/new/" class="button">Install the Github App</a>
-    <h1>Code Parameter Content:</h1>
-    <div id="codeContent"></div>
-    <button id="getRepos">Get Repositories</button>
-    <div id="repoList"></div>
-    WOW CATS
+    <div id="auth-with-github" style="display: none;">
+        <p><a href="https://github.com/login/oauth/authorize?client_id=Iv1.ca87efccd900ea4b" class="button">Auth with Github</a>
+    </div>
+    <div id="choose-repo" style="display: none;">
+        <p>Choose a repo:</p>
+        <div id="repoList"></div>
+    </div>
+
+
+
     <script type="module" src="script.js"></script>
 </body>
 </html>
