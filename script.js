@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-//this is a test
+const cat = "WOW";
 document.getElementById("getRepos").addEventListener("click", function () {
     // Retrieve the token from the cookie
     const cookies = document.cookie.split(";").map((cookie) => cookie.trim());
