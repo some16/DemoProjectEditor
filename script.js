@@ -77,6 +77,7 @@ function displayRepositories(repositories) {
     repoListElement.appendChild(ul);
 }
 
+const Octokit = require('@octokit/rest');
 
 // Access the "test" cookie to retrieve the GitHub token
 const cookieName = 'test'; // Change this to match your cookie name
