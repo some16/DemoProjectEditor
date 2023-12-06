@@ -6,17 +6,18 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
   
-var token = getCookie('githubToken');
-var octokit = new Octokit({ auth: `token ${token}` });
-
-octokit.request('GET /user')
-.catch(error => {
-    console.log(`Token is invalid probably. Token: ${token}`)
-    token = undefined;
-});
 
 
 document.addEventListener("DOMContentLoaded", function() {
+    var token = getCookie('githubToken');
+    var octokit = new Octokit({ auth: `token ${token}` });
+
+    octokit.request('GET /user')
+    .catch(error => {
+        console.log(`Token is invalid probably. Token: ${token}`)
+        token = undefined;
+    });
+
     if (token !== undefined) {
         console.log("Token is undefined, setting up github auth");
         chooseRepo();
@@ -32,6 +33,7 @@ function authSetup() {
     const urlParams = new URLSearchParams(window.location.search);
     const codeParam = urlParams.get("code");
     if (codeParam) {
+        console.log("codeParam exists!")
         document.getElementById("auth-with-github").innerHTML = "<p>Authenticating with Github</p>";
 
         const proxyUrl = `https://gatekeeper-n0qw.onrender.com/authenticate/${codeParam}`;
