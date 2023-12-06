@@ -29,8 +29,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function authSetup() {
-    document.getElementById("auth-with-github").style.display = "block";
-
     const urlParams = new URLSearchParams(window.location.search);
     const codeParam = urlParams.get("code");
 
