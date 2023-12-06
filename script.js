@@ -93,22 +93,15 @@ const octokit = new Octokit({
   auth: `token ${token}`,
 });
 
-// Fetch private repositories
-async function getPrivateRepositories() {
-  try {
-    const response = await octokit.repos.listForAuthenticatedUser({
-      visibility: 'private',
-    });
+octokit.rest.repos.listForAuthenticatedUser({
+  visibility: 'private',
+}).then(({ data }) => {
+  // handle the list of repositories
+  console.log(data);
+}).catch((error) => {
+  // handle any errors
+  console.error(error);
+});
 
-    // Process the list of private repositories
-    const privateRepos = response.data;
-    console.log('Private Repositories:');
-    privateRepos.forEach((repo) => {
-      console.log(repo.full_name);
-    });
-  } catch (error) {
-    console.error('Error fetching private repositories:', error.message);
-  }
-}
 
-getPrivateRepositories();
+
