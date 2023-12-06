@@ -18,8 +18,10 @@ octokit.request('GET /user')
 
 document.addEventListener("DOMContentLoaded", function() {
     if (token !== undefined) {
+        console.log("Token is undefined, setting up github auth");
         chooseRepo();
     } else {
+        console.log("Token is valid, setting up editor");
         authSetup();
     }
 });
