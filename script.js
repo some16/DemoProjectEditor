@@ -43,8 +43,8 @@ function authSetup() {
         .then(response => response.json())
         .then(data => {
             document.cookie = `githubToken=${data.token}`;
-            token = data.token;
-            octokit = new Octokit({ auth: `token ${token}` });
+            var token = data.token;
+            var octokit = new Octokit({ auth: `token ${token}` });
             chooseRepo();
         })
         .catch(error => {
