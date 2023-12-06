@@ -9,7 +9,7 @@ function getCookie(name) {
 const token = getCookie('test');
 
 if (token !== undefined && token !== 'undefined') {
-    const octokit = new Octokit({ auth: `token YOUR_GITHUB_TOKEN` });
+    const octokit = new Octokit({ auth: `token ${token}` });
 
     octokit.request('GET /user')
     .then(() => chooseRepo())
@@ -19,7 +19,6 @@ if (token !== undefined && token !== 'undefined') {
     });
 } else {
     authSetup();
-    
 }
 
 function authSetup() {
