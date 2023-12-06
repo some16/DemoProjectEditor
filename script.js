@@ -8,21 +8,27 @@ function getCookie(name) {
   
 const token = getCookie('test');
 
-if (token !== undefined) {
+if (cookieValue !== undefined && cookieValue !== 'undefined') {
     const octokit = new Octokit({ auth: `token YOUR_GITHUB_TOKEN` });
 
     octokit.request('GET /user')
-    .then(() => console.log('Token is valid'))
-    .catch(error => console.error('Token is invalid or another error occurred:', error.message));
-    
-    document.getElementById("choose-repo").style.display = "block";
-    console.log(`If. Token is ${token}`);
+    .then(() => chooseRepo())
+    .catch(error => {
+        console.error('Token is invalid or another error occurred:', error.message)
+        authSetup();
+    });
 } else {
-    document.getElementById("auth-with-github").style.display = "block";
-    console.log(`Else. Token is ${token}`);
+    authSetup();
     
 }
 
+function authSetup() {
+    document.getElementById("auth-with-github").style.display = "block";
+}
+
+function chooseRepo() {
+    document.getElementById("choose-repo").style.display = "block";
+}
 
 
 // document.addEventListener("DOMContentLoaded", function() {
