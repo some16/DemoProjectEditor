@@ -30,6 +30,8 @@ function authSetup() {
     const urlParams = new URLSearchParams(window.location.search);
     const codeParam = urlParams.get("code");
     if (codeParam) {
+        document.getElementById("auth-with-github").innerHTML = "<p>Authenticating with Github</p>";
+
         const proxyUrl = `https://gatekeeper-n0qw.onrender.com/authenticate/${codeParam}`;
         fetch(proxyUrl)
         .then(response => response.json())
