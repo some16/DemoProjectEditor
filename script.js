@@ -78,7 +78,7 @@ function displayRepositories(repositories) {
 }
 
 
-const Octokit = require('@octokit/rest');
+import { Octokit, App } from "https://esm.sh/octokit";
 
 // Access the "test" cookie to retrieve the GitHub token
 const cookieName = 'test'; // Change this to match your cookie name
