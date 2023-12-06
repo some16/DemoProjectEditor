@@ -31,7 +31,7 @@ function authSetup() {
     const codeParam = urlParams.get("code");
     if (codeParam) {
         const proxyUrl = `https://gatekeeper-n0qw.onrender.com/authenticate/${codeParam}`;
-        etch(proxyUrl)
+        fetch(proxyUrl)
         .then(response => response.json())
         .then(data => {
             document.cookie = `githubToken=${data.token}`;
