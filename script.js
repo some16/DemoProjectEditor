@@ -82,7 +82,7 @@ const Octokit = require('@octokit/rest');
 
 // Access the "test" cookie to retrieve the GitHub token
 const cookieName = 'test'; // Change this to match your cookie name
-const token = getCookie(cookieName); // Implement a function to get the cookie value
+token = getCookie(cookieName); // Implement a function to get the cookie value
 
 if (!token) {
   console.error(`Cookie "${cookieName}" not found or token is empty.`);
