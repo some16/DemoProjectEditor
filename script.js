@@ -27,7 +27,8 @@ document.addEventListener("DOMContentLoaded", function() {
 function authSetup() {
     document.getElementById("auth-with-github").style.display = "block";
 
-    const codeParam = URLSearchParams(window.location.search).get("code");
+    const urlParams = new URLSearchParams(window.location.search);
+    const codeParam = urlParams.get("code");
     if (codeParam) {
         const proxyUrl = `https://gatekeeper-n0qw.onrender.com/authenticate/${codeParam}`;
         etch(proxyUrl)
@@ -47,7 +48,7 @@ function authSetup() {
 
 function chooseRepo() {
     document.getElementById("choose-repo").style.display = "block";
-    document.getElementById("auth-with-github").style.display = "noe";
+    document.getElementById("auth-with-github").style.display = "none";
 }
 
 
