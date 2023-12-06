@@ -92,27 +92,27 @@ const octokit = new Octokit({
   auth: `token ${token}`,
 });
 
-// octokit.rest.repos.listForAuthenticatedUser({
-//   visibility: 'private',
-// }).then(({ data }) => {
-//   displayRepositories(data);
-//   console.log(data);
-// }).catch((error) => {
-//   // handle any errors
-//   console.error(error);
-// });
-
 octokit.rest.repos.listForAuthenticatedUser({
-  affiliation: "owner,collaborator,organization_member"
+  visibility: 'private',
 }).then(({ data }) => {
-  // Filter repositories with write or admin permission
-  const reposWithWriteAccess = data.filter(repo => 
-    repo.permissions.admin || repo.permissions.push
-  );
-displayRepositories(reposWithWriteAccess);
-
-  console.log(reposWithWriteAccess);
-}).catch(error => {
-  console.error("Error fetching repositories:", error);
+  displayRepositories(data);
+  console.log(data);
+}).catch((error) => {
+  // handle any errors
+  console.error(error);
 });
+
+// octokit.rest.repos.listForAuthenticatedUser({
+//   affiliation: "owner,collaborator,organization_member"
+// }).then(({ data }) => {
+//   // Filter repositories with write or admin permission
+//   const reposWithWriteAccess = data.filter(repo => 
+//     repo.permissions.admin || repo.permissions.push
+//   );
+// displayRepositories(reposWithWriteAccess);
+
+//   console.log(reposWithWriteAccess);
+// }).catch(error => {
+//   console.error("Error fetching repositories:", error);
+// });
 
