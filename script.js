@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
         fetch(gatekeeperUrl)
         .then(response => response.json())
         .then(data => {
-            document.cookie = "token=${data.token}; Secure; HttpOnly";
+            document.cookie = `token=${data.token}; Secure; HttpOnly`;
         })
         .catch(error => {
             console.error("Error:", error);
