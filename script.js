@@ -39,7 +39,7 @@ document.getElementById("getRepos").addEventListener("click", function () {
     }
 
     if (!token) {
-        console.error("Token not found in the cookie.");
+        console.error(`Token not found in the cookie. ${cookies}`);
         return;
     }
 
