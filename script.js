@@ -6,32 +6,52 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
   
-const token = getCookie('test');
+var token = getCookie('githubToken');
+var octokit = new Octokit({ auth: `token ${token}` });
 
-if (token !== undefined && token !== 'undefined') {
-    const octokit = new Octokit({ auth: `token ${token}` });
+octokit.request('GET /user')
+.catch(error => {
+    console.error('Token is invalid or another error occurred:', error.message)
+    token = undefined;
+});
 
-    octokit.request('GET /user')
-    .then(() => chooseRepo())
-    .catch(error => {
-        console.error('Token is invalid or another error occurred:', error.message)
+
+document.addEventListener("DOMContentLoaded", function() {
+    if (token !== undefined) {
+        chooseRepo();
+    } else {
         authSetup();
-    });
-} else {
-    authSetup();
-}
+    }
+});
 
 function authSetup() {
     document.getElementById("auth-with-github").style.display = "block";
+
+    const codeParam = URLSearchParams(window.location.search).get("code");
+    if (codeParam) {
+        const proxyUrl = `https://gatekeeper-n0qw.onrender.com/authenticate/${codeParam}`;
+        etch(proxyUrl)
+        .then(response => response.json())
+        .then(data => {
+            document.cookie = `githubToken=${data.token}`;
+            token = data.token;
+            octokit = new Octokit({ auth: `token ${token}` });
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    }
+    chooseRepo();
+
 }
 
 function chooseRepo() {
     document.getElementById("choose-repo").style.display = "block";
+    document.getElementById("auth-with-github").style.display = "noe";
 }
 
 
 // document.addEventListener("DOMContentLoaded", function() {
-//     // Get code from url
 //     const urlParams = new URLSearchParams(window.location.search);
 //     const codeParam = urlParams.get("code");
 
