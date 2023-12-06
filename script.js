@@ -55,8 +55,7 @@ function authSetup() {
 }
 
 function chooseRepo() {
-    document.getElementById("choose-repo").style.display = "block";
-    document.getElementById("auth-with-github").style.display = "none";
+    window.location.replace("https://some16.github.io/DemoProjectEditor/repos.html");
 }
 
 
