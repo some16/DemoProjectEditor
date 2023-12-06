@@ -9,6 +9,12 @@ function getCookie(name) {
 const token = getCookie('test');
 
 if (token !== undefined) {
+    const octokit = new Octokit({ auth: `token YOUR_GITHUB_TOKEN` });
+
+    octokit.request('GET /user')
+    .then(() => console.log('Token is valid'))
+    .catch(error => console.error('Token is invalid or another error occurred:', error.message));
+    
     document.getElementById("choose-repo").style.display = "block";
     console.log(`If. Token is ${token}`);
 } else {
