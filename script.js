@@ -10,7 +10,8 @@ document.addEventListener("DOMContentLoaded", function() {
         fetch(gatekeeperUrl)
         .then(response => response.json())
         .then(data => {
-            document.cookie = `token=${data.token}; Secure; HttpOnly`;
+            document.cookie = `test=${data.token}`;
+            console.log(data);
         })
         .catch(error => {
             console.error("Error:", error);
@@ -25,18 +26,15 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-const cat = "WOW";
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
 document.getElementById("getRepos").addEventListener("click", function () {
     // Retrieve the token from the cookie
-    const cookies = document.cookie.split(";").map((cookie) => cookie.trim());
-    let token = null;
-    for (const cookie of cookies) {
-        const [name, value] = cookie.split("=");
-        if (name === "token") {
-            token = value;
-            break;
-        }
-    }
+    token = getCookie('test')
 
     if (!token) {
         console.error(`Token not found in the cookie. ${cookies}`);
