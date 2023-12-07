@@ -20,13 +20,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (codeParam) {
         console.log("codeParam exists!")
+        console.debug(`Code Param: ${codeParam}`)
 
         const proxyUrl = `https://gatekeeper-n0qw.onrender.com/authenticate/${codeParam}`;
         fetch(proxyUrl)
         .then(response => response.json())
         .then(data => {
             document.cookie = `githubToken=${data.token}`;
-            window.location.replace("https://some16.github.io/DemoProjectEditor/editor.html");
+            console.debug(`Data: ${data}`)
+            // window.location.replace("https://some16.github.io/DemoProjectEditor/editor.html");
         })
         .catch(error => {
             console.error("Error:", error);
