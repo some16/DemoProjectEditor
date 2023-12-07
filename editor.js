@@ -22,14 +22,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 function loadPage(octokit) {
-    // octokit.rest.repos.listForAuthenticatedUser({
-    //   visibility: 'private',
-    // }).then(({ data }) => {
-    //   console.log(data);
-    //   displayRepositories(data);
-    // }).catch((error) => {
-    //   console.error(error);
-    // });
+    octokit.rest.repos.listForAuthenticatedUser({
+      visibility: 'public',
+    }).then(({ data }) => {
+      console.log(data);
+      displayRepositories(data);
+    }).catch((error) => {
+      console.error(error);
+    });
 
     octokit.rest.users.getAuthenticated()
     .then(({ data }) => {
