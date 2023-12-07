@@ -16,7 +16,7 @@ export function checkToken() {
                 resolve(true);
             })
             .catch(error => {
-                window.location.replace("https://some16.github.io/DemoProjectEditor/authenticate.html");
+                window.location.replace("https://some16.github.io/DemoProjectEditor/index.html");
                 reject(false);
             });
     });
