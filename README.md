@@ -1,1 +1,2 @@
-This app implements Github OAuthApp Login for Github Pages using [Gatekeeper](https://github.com/prose/gatekeeper).
+This app implements Github OAuthApp Login for Github Pages using [Gatekeeper](https://github.com/prose/gatekeeper).  
+Demo is here: [some16.github.io/DemoProjectEditor](https://some16.github.io/DemoProjectEditor/index.html)
