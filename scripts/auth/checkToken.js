@@ -20,7 +20,7 @@ export function checkToken() {
                 console.debug("Token is bad, sendign false")
                 console.debug(`Pathname is ${window.location.pathname}`)
                 console.log(error)
-                if (window.location.pathname !== "/DemoProjectEditor/index.html") {
+                if (window.location.pathname !== "/DemoProjectEditor/") {
                     console.debug("Path is not auth page, sending to auth page")
                     window.location.replace("https://some16.github.io/DemoProjectEditor/index.html");
                 }
