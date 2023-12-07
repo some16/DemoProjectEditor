@@ -25,6 +25,7 @@ function loadPage(octokit) {
     octokit.rest.repos.listForAuthenticatedUser({
       visibility: 'private',
     }).then(({ data }) => {
+      console.log(data);
       displayRepositories(data);
     }).catch((error) => {
       console.error(error);
