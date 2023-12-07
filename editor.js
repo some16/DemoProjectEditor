@@ -40,7 +40,7 @@ function loadPage(octokit) {
       })
         .then(({ data }) => {
           console.log(data);
-          displayRepositories(data);
+          displayRepositories(data.items);
         })
         .catch((error) => {
           console.error(error);
