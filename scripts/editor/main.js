@@ -1,4 +1,4 @@
-import { getOctokit } from 'scripts/auth/getOctokit.js'; // Adjust the path as needed
+import { getOctokit } from '../auth/getOctokit.js'; // Adjust the path as needed
 
 
 document.addEventListener("DOMContentLoaded", function() {

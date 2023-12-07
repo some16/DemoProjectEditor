@@ -1,5 +1,5 @@
 import { Octokit, App } from "https://esm.sh/octokit";
-import { checkToken } from "scripts/auth/checkToken.js"
+import { checkToken } from "./checkToken.js"
 
 
 document.addEventListener("DOMContentLoaded", function() {
