@@ -40,12 +40,8 @@ function authSetup() {
         fetch(proxyUrl)
         .then(response => response.json())
         .then(data => {
-            console.log(`Data: ${data}`);
-            console.log(`Token: ${data.token}`);
             document.cookie = `githubToken=${data.token}`;
-            var token = data.token;
-            var octokit = new Octokit({ auth: `token ${token}` });
-            // chooseRepo();
+            chooseRepo();
         })
         .catch(error => {
             console.error("Error:", error);
