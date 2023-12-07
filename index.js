@@ -17,7 +17,8 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log(`Token is invalid probably. Token: ${token}`)
         token = undefined;
     })
-    .then(() => {
+    .then(response => {
+        console.log(response);
         if (token == undefined) {
             console.log("Token is undefined, setting up github auth");
             authSetup();
@@ -40,7 +41,6 @@ function authSetup() {
         fetch(proxyUrl)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             document.cookie = `githubToken=${data.token}`;
             // chooseRepo();
         })
