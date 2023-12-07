@@ -52,7 +52,7 @@ function authSetup() {
 }
 
 function chooseRepo() {
-    window.location.replace("https://some16.github.io/DemoProjectEditor/editor.html");
+    // window.location.replace("https://some16.github.io/DemoProjectEditor/editor.html");
 }
 
 
