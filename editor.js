@@ -31,22 +31,23 @@ function loadPage(octokit) {
       console.error(error);
     });
 
-    octokit.users.getAuthenticated()
+    octokit.rest.users.getAuthenticated()
     .then(({ data }) => {
-    const username = data.login; // Get the username from the response
-    // Use the username to search for repositories
-    octokit.request('GET /search/repositories', {
+      const username = data.login; // Get the username from the response
+  
+      // Use the username to search for repositories
+      octokit.rest.search.repos({
         q: `user:${username}`,
-    })
+      })
         .then(({ data }) => {
-        console.log(data);
+          console.log(data);
         })
         .catch((error) => {
-        console.error(error);
+          console.error(error);
         });
     })
     .catch((error) => {
-    console.error(error);
+      console.error(error);
     });
 }
 
