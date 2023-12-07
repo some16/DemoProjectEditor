@@ -1,27 +1,9 @@
-import { Octokit, App } from "https://esm.sh/octokit";
-
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
+import { getOctokit } from 'scripts/auth/getOctokit.js'; // Adjust the path as needed
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    var token = getCookie('githubToken');
-    var octokit = new Octokit({ auth: `token ${token}` });
+    const octokit = getOctokit();
 
-    octokit.request('GET /user')
-    .catch(error => {
-        window.location.replace("https://some16.github.io/DemoProjectEditor/repos.html");
-    })
-    .then(() => {
-        loadPage(octokit);
-    });
-});
-
-
-function loadPage(octokit) {
     octokit.rest.repos.listForAuthenticatedUser({
       visibility: 'private',
     }).then(({ data }) => {
@@ -30,7 +12,8 @@ function loadPage(octokit) {
     }).catch((error) => {
       console.error(error);
     });
-}
+});
+
 
 function displayRepositories(repositories) {
     const repoListElement = document.getElementById("repoList");

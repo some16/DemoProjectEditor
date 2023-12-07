@@ -1,35 +1,11 @@
 import { Octokit, App } from "https://esm.sh/octokit";
-
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
-  
+import { checkToken } from "scripts/auth/checkToken.js"
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    var token = getCookie('githubToken');
-    var octokit = new Octokit({ auth: `token ${token}` });
-
-    octokit.request('GET /user')
-    .catch(error => {
-        console.log(`Token is invalid probably. Token: ${token}`)
-        token = undefined;
-    })
-    .then(response => {
-        console.log(response);
-        if (token == undefined) {
-            console.log("Token is undefined, setting up github auth");
-            authSetup();
-        } else {
-            console.log("Token is valid, setting up editor");
-            chooseRepo();
-        }
-    });
-});
-
-function authSetup() {
+    if (checkToken()) {
+        window.location.replace("https://some16.github.io/DemoProjectEditor/editor.html");
+    }
 
     const urlParams = new URLSearchParams(window.location.search);
     const codeParam = urlParams.get("code");
@@ -42,18 +18,13 @@ function authSetup() {
         .then(response => response.json())
         .then(data => {
             document.cookie = `githubToken=${data.token}`;
-            chooseRepo();
+            window.location.replace("https://some16.github.io/DemoProjectEditor/editor.html");
         })
         .catch(error => {
             console.error("Error:", error);
         });
     }
-
-}
-
-function chooseRepo() {
-    window.location.replace("https://some16.github.io/DemoProjectEditor/editor.html");
-}
+});
 
 
 // document.addEventListener("DOMContentLoaded", function() {
