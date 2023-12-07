@@ -16,7 +16,9 @@ export function checkToken() {
                 resolve(true);
             })
             .catch(error => {
-                window.location.replace("https://some16.github.io/DemoProjectEditor/index.html");
+                if (window.location.pathname !== "/DemoProjectEditor/index.html") {
+                    window.location.replace("https://some16.github.io/DemoProjectEditor/index.html");
+                }
                 reject(false);
             });
     });
