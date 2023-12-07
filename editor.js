@@ -5,8 +5,6 @@ function getCookie(name) {
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
-  
-
 
 document.addEventListener("DOMContentLoaded", function() {
     var token = getCookie('githubToken');
@@ -14,45 +12,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     octokit.request('GET /user')
     .catch(error => {
-        console.log(`Token is invalid probably. Token: ${token}`)
-        token = undefined;
+        window.location.replace("https://some16.github.io/DemoProjectEditor/repos.html");
     })
-    .then(() => {
-        if (token == undefined) {
-            console.log("Token is undefined, setting up github auth");
-            authSetup();
-        } else {
-            console.log("Token is valid, setting up editor");
-            chooseRepo();
-        }
-    });
 });
-
-function authSetup() {
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const codeParam = urlParams.get("code");
-
-    if (codeParam) {
-        console.log("codeParam exists!")
-
-        const proxyUrl = `https://gatekeeper-n0qw.onrender.com/authenticate/${codeParam}`;
-        fetch(proxyUrl)
-        .then(response => response.json())
-        .then(data => {
-            document.cookie = `githubToken=${data.token}`;
-            chooseRepo();
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        });
-    }
-
-}
-
-function chooseRepo() {
-    window.location.replace("https://some16.github.io/DemoProjectEditor/repos.html");
-}
 
 
 // document.addEventListener("DOMContentLoaded", function() {
