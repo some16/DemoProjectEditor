@@ -19,5 +19,3 @@ export function checkToken() {
         return true;
     });
 }
-
-checkToken();
