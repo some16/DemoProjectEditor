@@ -18,6 +18,7 @@ export function checkToken() {
             })
             .catch(error => {
                 console.debug("Token is bad, sendign false")
+                console.debug(`Pathname is ${window.location.pathname}`)
                 console.log(error)
                 if (window.location.pathname !== "/DemoProjectEditor/index.html") {
                     console.debug("Path is not auth page, sending to auth page")
