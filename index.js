@@ -42,7 +42,7 @@ function authSetup() {
         .then(response => response.json())
         .then(data => {
             document.cookie = `githubToken=${data.token}`;
-            // chooseRepo();
+            chooseRepo();
         })
         .catch(error => {
             console.error("Error:", error);
@@ -52,7 +52,7 @@ function authSetup() {
 }
 
 function chooseRepo() {
-    // window.location.replace("https://some16.github.io/DemoProjectEditor/editor.html");
+    window.location.replace("https://some16.github.io/DemoProjectEditor/editor.html");
 }
 
 
