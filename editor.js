@@ -6,6 +6,7 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
+
 document.addEventListener("DOMContentLoaded", function() {
     var token = getCookie('githubToken');
     var octokit = new Octokit({ auth: `token ${token}` });
@@ -14,111 +15,37 @@ document.addEventListener("DOMContentLoaded", function() {
     .catch(error => {
         window.location.replace("https://some16.github.io/DemoProjectEditor/repos.html");
     })
+    .then(() => {
+        loadPage(octokit);
+    });
 });
 
 
-// document.addEventListener("DOMContentLoaded", function() {
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const codeParam = urlParams.get("code");
+function loadPage(octokit) {
+    octokit.rest.repos.listForAuthenticatedUser({
+      visibility: 'private',
+    }).then(({ data }) => {
+      displayRepositories(data);
+    }).catch((error) => {
+      console.error(error);
+    });
+}
 
-//     // Get token
-//     if (codeParam) {
-//         const gatekeeperUrl = `https://gatekeeper-n0qw.onrender.com/authenticate/${codeParam}`;
-        
-//         fetch(gatekeeperUrl)
-//         .then(response => response.json())
-//         .then(data => {
-//             document.cookie = `test=${data.token}`;
-//             console.log(data);
-//         })
-//         .catch(error => {
-//             console.error("Error:", error);
-//         });
+function displayRepositories(repositories) {
+    const repoListElement = document.getElementById("repoList");
+    repoListElement.innerHTML = "";
 
+    if (repositories.length === 0) {
+        repoListElement.textContent = "No repositories found.";
+        return;
+    }
 
-//     // If not token found
-//     } else {
+    const ul = document.createElement("ul");
+    repositories.forEach((repo) => {
+        const li = document.createElement("li");
+        li.textContent = repo.name;
+        ul.appendChild(li);
+    });
 
-//         const codeContentElement = document.getElementById("codeContent");
-//         codeContentElement.textContent = "Code Parameter not found in the URL.";
-//     }
-// });
-
-// document.getElementById("getRepos").addEventListener("click", function () {
-//     // Retrieve the token from the cookie
-//     token = getCookie('test')
-
-//     if (!token) {
-//         console.error(`Token not found in the cookie. ${cookies}`);
-//         return;
-//     }
-
-//     const apiUrl = "https://api.github.com/user/repos";
-
-//     fetch(apiUrl, {
-//         method: "GET",
-//         headers: {
-//             Authorization: `Bearer ${token}`,
-//         },
-//     })
-//     .then((response) => response.json())
-//     .then((data) => {
-//         displayRepositories(data);
-//     })
-//     .catch((error) => {
-//         console.error("Error fetching repositories:", error);
-//     });
-// });
-
-// function displayRepositories(repositories) {
-//     const repoListElement = document.getElementById("repoList");
-//     repoListElement.innerHTML = "";
-
-//     if (repositories.length === 0) {
-//         repoListElement.textContent = "No repositories found.";
-//         return;
-//     }
-
-//     const ul = document.createElement("ul");
-//     repositories.forEach((repo) => {
-//         const li = document.createElement("li");
-//         li.textContent = repo.name;
-//         ul.appendChild(li);
-//     });
-
-//     repoListElement.appendChild(ul);
-// }
-
-// if (!token) {
-//   console.error(`Cookie "${cookieName}" not found or token is empty.`);
-// }
-
-// // Initialize Octokit with the token
-// const octokit = new Octokit({
-//   auth: `token ${token}`,
-// });
-
-// octokit.rest.repos.listForAuthenticatedUser({
-//   visibility: 'private',
-// }).then(({ data }) => {
-//   displayRepositories(data);
-//   console.log(data);
-// }).catch((error) => {
-//   // handle any errors
-//   console.error(error);
-// });
-
-// // octokit.rest.repos.listForAuthenticatedUser({
-// //   affiliation: "owner,collaborator,organization_member"
-// // }).then(({ data }) => {
-// //   // Filter repositories with write or admin permission
-// //   const reposWithWriteAccess = data.filter(repo => 
-// //     repo.permissions.admin || repo.permissions.push
-// //   );
-// // displayRepositories(reposWithWriteAccess);
-
-// //   console.log(reposWithWriteAccess);
-// // }).catch(error => {
-// //   console.error("Error fetching repositories:", error);
-// // });
-
+    repoListElement.appendChild(ul);
+}
