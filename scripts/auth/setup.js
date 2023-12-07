@@ -3,9 +3,7 @@ import { checkToken } from "./checkToken.js"
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    var check = checkToken();
-    console.log(checkToken());
-    if (check == true) {
+    if (checkToken()) {
         window.location.replace("https://some16.github.io/DemoProjectEditor/editor.html");
     }
 

@@ -7,15 +7,18 @@ function getCookie(name) {
 }
 
 export function checkToken() {
-    var token = getCookie('githubToken');
-    var octokit = new Octokit({ auth: `token ${token}` });
+    return new Promise((resolve, reject) => {
+        var token = getCookie('githubToken');
+        var octokit = new Octokit({ auth: `token ${token}` });
 
-    octokit.request('GET /user')
-    .catch(error => {
-        window.location.replace("https://some16.github.io/DemoProjectEditor/authenticate.html");
-        return false;
-    })
-    .then(response => {
-        return true;
+        octokit.request('GET /user')
+            .then(response => {
+                resolve(true);
+            })
+            .catch(error => {
+                window.location.replace("https://some16.github.io/DemoProjectEditor/authenticate.html");
+                reject(false);
+            });
     });
+
 }
