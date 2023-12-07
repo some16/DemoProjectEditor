@@ -5,9 +5,11 @@ import { checkToken } from "./checkToken.js"
 document.addEventListener("DOMContentLoaded", function() {
     checkToken()
     .then(result => {
+        console.debug("Token is good, redirecting to editor")
         if (result) {window.location.replace("https://some16.github.io/DemoProjectEditor/editor.html")}
     })
     .catch(error => {
+        console.debug("Token is bad")
         console.log(error)
     });
 

@@ -13,11 +13,14 @@ export function checkToken() {
 
         octokit.request('GET /user')
             .then(response => {
+                console.debug("Token is good, sending true")
                 resolve(true);
             })
             .catch(error => {
+                console.debug("Token is bad, sendign false")
                 console.log(error)
                 if (window.location.pathname !== "/DemoProjectEditor/index.html") {
+                    console.debug("Path is not auth page, sending to auth page")
                     window.location.replace("https://some16.github.io/DemoProjectEditor/index.html");
                 }
                 reject(false);
