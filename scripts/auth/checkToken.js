@@ -13,8 +13,11 @@ export function checkToken() {
     octokit.request('GET /user')
     .catch(error => {
         window.location.replace("https://some16.github.io/DemoProjectEditor/authenticate.html");
+        return false;
     })
-    .then(response => {return true});
+    .then(response => {
+        return true;
+    });
 }
 
 checkToken();
