@@ -3,6 +3,7 @@ import { checkToken } from "./checkToken.js"
 
 
 document.addEventListener("DOMContentLoaded", function() {
+    console.log(checkToken());
     if (checkToken()) {
         window.location.replace("https://some16.github.io/DemoProjectEditor/editor.html");
     }
