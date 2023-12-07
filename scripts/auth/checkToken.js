@@ -16,6 +16,7 @@ export function checkToken() {
                 resolve(true);
             })
             .catch(error => {
+                console.log(error)
                 if (window.location.pathname !== "/DemoProjectEditor/index.html") {
                     window.location.replace("https://some16.github.io/DemoProjectEditor/index.html");
                 }
