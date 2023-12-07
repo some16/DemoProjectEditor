@@ -22,25 +22,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 function loadPage(octokit) {
-    octokit.rest.repos.listForAuthenticatedUser({
-      visibility: 'private',
-    }).then(({ data }) => {
-      console.log(data);
-      displayRepositories(data);
-    }).catch((error) => {
-      console.error(error);
-    });
+    // octokit.rest.repos.listForAuthenticatedUser({
+    //   visibility: 'private',
+    // }).then(({ data }) => {
+    //   console.log(data);
+    //   displayRepositories(data);
+    // }).catch((error) => {
+    //   console.error(error);
+    // });
 
     octokit.rest.users.getAuthenticated()
     .then(({ data }) => {
       const username = data.login; // Get the username from the response
   
-      // Use the username to search for repositories
       octokit.rest.search.repos({
         q: `user:${username}`,
       })
         .then(({ data }) => {
           console.log(data);
+          displayRepositories(data);
         })
         .catch((error) => {
           console.error(error);
