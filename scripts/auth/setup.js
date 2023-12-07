@@ -26,13 +26,10 @@ document.addEventListener("DOMContentLoaded", function() {
         fetch(proxyUrl)
         .then(response => response.json())
         .then(data => {
-            console.log("TOKEN GOTTEN")
             document.cookie = `githubToken=${data.token}`;
-            console.debug(`Data: ${data}`)
-            // window.location.replace("https://some16.github.io/DemoProjectEditor/editor.html");
+            window.location.replace("https://some16.github.io/DemoProjectEditor/editor.html");
         })
         .catch(error => {
-            console.log("TOKEN NOT GOTTEN")
             console.error("Error:", error);
         });
     }
