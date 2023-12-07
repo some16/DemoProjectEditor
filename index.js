@@ -42,7 +42,7 @@ function authSetup() {
         .then(data => {
             console.log(data);
             document.cookie = `githubToken=${data.token}`;
-            chooseRepo();
+            // chooseRepo();
         })
         .catch(error => {
             console.error("Error:", error);
