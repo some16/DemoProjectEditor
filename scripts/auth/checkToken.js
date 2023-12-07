@@ -6,7 +6,7 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
-function checkToken() {
+export function checkToken() {
     var token = getCookie('githubToken');
     var octokit = new Octokit({ auth: `token ${token}` });
 
