@@ -20,5 +20,5 @@ export function checkToken() {
                 reject(false);
             });
     });
-
 }
+checkToken();

@@ -3,9 +3,15 @@ import { checkToken } from "./checkToken.js"
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    if (checkToken()) {
-        window.location.replace("https://some16.github.io/DemoProjectEditor/editor.html");
-    }
+    checkToken()
+    .then(result => {
+        if (result) {window.location.replace("https://some16.github.io/DemoProjectEditor/editor.html")}
+    })
+    .catch(error => {
+        console.log(error)
+    });
+
+
 
     const urlParams = new URLSearchParams(window.location.search);
     const codeParam = urlParams.get("code");
