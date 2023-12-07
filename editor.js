@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function loadPage(octokit) {
     octokit.rest.repos.listForAuthenticatedUser({
-      visibility: 'public',
+    //   visibility: 'public',
     }).then(({ data }) => {
       console.log(data);
       displayRepositories(data);
