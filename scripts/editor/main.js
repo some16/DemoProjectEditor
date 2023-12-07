@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const octokit = getOctokit();
 
     octokit.rest.repos.listForAuthenticatedUser({
-      visibility: 'private',
+      // visibility: 'private',
     }).then(({ data }) => {
       console.log(data);
       displayRepositories(data);
