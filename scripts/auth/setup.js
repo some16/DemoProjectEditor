@@ -23,9 +23,12 @@ document.addEventListener("DOMContentLoaded", function() {
         console.debug(`Code Param: ${codeParam}`)
 
         const proxyUrl = `https://gatekeeper-n0qw.onrender.com/authenticate/${codeParam}`;
+
+        console.log(`Fetching token with ${proxyUrl}`)
         fetch(proxyUrl)
         .then(response => response.json())
         .then(data => {
+            console.log(`Token received: ${data.token}`)
             document.cookie = `githubToken=${data.token}`;
             window.location.replace("https://some16.github.io/DemoProjectEditor/editor.html");
         })
