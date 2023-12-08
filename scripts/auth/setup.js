@@ -19,10 +19,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const codeParam = urlParams.get("code");
 
     if (codeParam) {
+        const proxyUrl = `https://gatekeeper-n0qw.onrender.com/authenticate/${codeParam}`;
+        
         console.log(`Code Param: ${codeParam}`)
         console.log(`Fetching token with ${proxyUrl}`);
 
-        const proxyUrl = `https://gatekeeper-n0qw.onrender.com/authenticate/${codeParam}`;
 
         fetch(proxyUrl)
         .then(response => response.json())
