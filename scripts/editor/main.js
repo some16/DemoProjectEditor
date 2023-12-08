@@ -4,15 +4,30 @@ import { getOctokit } from '../auth/getOctokit.js'; // Adjust the path as needed
 document.addEventListener("DOMContentLoaded", function() {
     const octokit = getOctokit();
 
-    octokit.rest.repos.listForAuthenticatedUser({
-      // visibility: 'private',
-    }).then(({ data }) => {
-      console.log(data);
-      displayRepositories(data);
-    }).catch((error) => {
-      console.error(error);
+    getWriteAccessRepos()
+    .then((repositories) => {
+      displayRepositories(repositories);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
     });
 });
+
+
+
+async function getWriteAccessRepos(octokit) {
+  const repositoriesWithWriteAccess = [];
+
+  for await (const { data } of octokit.paginate.iterator(
+    octokit.repos.listForAuthenticatedUser
+  )) {
+    const writeAccessRepositories = data.filter((repo) => {
+      return repo.permissions.push;
+    });
+    repositoriesWithWriteAccess.push(...writeAccessRepositories);
+  }
+  return repositoriesWithWriteAccess;
+}
 
 
 function displayRepositories(repositories) {
